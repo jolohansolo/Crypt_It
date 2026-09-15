@@ -1,6 +1,8 @@
 import argparse
 import os
 
+from cryptolab.ciphers.caesar import CaesarCipher
+
 def correct_path(string):
     if not string.lower().endswith(".txt"):
         raise argparse.ArgumentTypeError(
@@ -85,6 +87,25 @@ def validate_args(parser, args):
             "--cipher caesar requires --key"
         )
 
+def read_input(args):
+    if args.text is not None:
+        return args.text
+
+    with open(args.file, "r", encoding="utf-8") as file:
+        return file.read()
+
+def process_cipher(args, text):
+    if args.cipher == "caesar":
+        result = text
+
+        for _ in range(args.iterations):
+            if args.decrypt:
+                result = CaesarCipher.decrypt(result, args.key)
+            else:
+                result = CaesarCipher.encrypt(result, args.key)
+
+        return result
+
 
 def main():
     parser = create_parser()
@@ -92,7 +113,17 @@ def main():
 
     validate_args(parser, args)
 
-    print(args)
+    text = read_input(args)
+    result = process_cipher(args, text)
+
+    if args.verbose:
+        print(f"Cipher: {args.cipher}")
+        print(f"Key: {args.key}")
+        print(f"Iterations: {args.iterations}")
+        print(f"Decrypt: {args.decrypt}")
+        print()
+
+    print(result)
 
 
 if __name__ == "__main__":

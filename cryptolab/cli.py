@@ -2,6 +2,7 @@ import argparse
 import os
 
 from cryptolab.ciphers.caesar import CaesarCipher
+from cryptolab.ciphers.vigenere import VigenereCipher
 
 def correct_path(string):
     if not string.lower().endswith(".txt"):
@@ -35,13 +36,13 @@ def create_parser():
     parser.add_argument(
         "--cipher",
         required=True,
-        choices=["caesar"],
+        choices=["caesar", "vigenere"],
         help="Cipher to use"
     )
 
     parser.add_argument(
         "--key",
-        type=int,
+        type=str,
         help="Encryption/decryption key"
     )
 
@@ -105,7 +106,16 @@ def process_cipher(args, text):
                 result = CaesarCipher.encrypt(result, args.key)
 
         return result
-
+    elif args.cipher == 'vigenere':
+        result = text
+        for _ in range(args.iterations):
+            if args.decrypt:
+                result = VigenereCipher.decrypt(result, args.key)
+            else:
+                result = VigenereCipher.encrypt(result, args.key)
+        return result
+    else:
+        raise ValueError(f"Unknown cipher: {args.cipher}")
 
 def main():
     parser = create_parser()

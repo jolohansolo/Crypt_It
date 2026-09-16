@@ -212,3 +212,57 @@ def test_cli_encrypt_file(capsys, monkeypatch, tmp_path):
     captured = capsys.readouterr()
 
     assert captured.out.strip() == "Khoor Zruog"
+
+from cryptolab.cli import create_parser, process_cipher
+
+
+def test_affine_encrypt():
+    parser = create_parser()
+    args = parser.parse_args([
+        "--cipher", "affine",
+        "--key", "5,8",
+        "--text", "hello"
+    ])
+
+    result = process_cipher(args, args.text)
+
+    assert result == "rclla"
+
+
+def test_affine_decrypt():
+    parser = create_parser()
+    args = parser.parse_args([
+        "--cipher", "affine",
+        "--key", "5,8",
+        "--text", "rclla",
+        "--decrypt"
+    ])
+
+    result = process_cipher(args, args.text)
+
+    assert result == "hello"
+
+
+def test_affine_iterations():
+    parser = create_parser()
+    args = parser.parse_args([
+        "--cipher", "affine",
+        "--key", "5,8",
+        "--iterations", "2",
+        "--text", "hello"
+    ])
+
+    result = process_cipher(args, args.text)
+
+    assert result == "pslli"
+
+
+def test_affine_key_is_split_into_two_values():
+    parser = create_parser()
+    args = parser.parse_args([
+        "--cipher", "affine",
+        "--key", "5,8",
+        "--text", "abc"
+    ])
+
+    assert args.key.split(",") == ["5", "8"]

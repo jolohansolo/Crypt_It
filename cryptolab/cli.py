@@ -3,6 +3,7 @@ import os
 
 from cryptolab.ciphers.caesar import CaesarCipher
 from cryptolab.ciphers.vigenere import VigenereCipher
+from cryptolab.ciphers.affine import AffineCipher
 
 def correct_path(string):
     if not string.lower().endswith(".txt"):
@@ -36,8 +37,8 @@ def create_parser():
     parser.add_argument(
         "--cipher",
         required=True,
-        choices=["caesar", "vigenere"],
-        help="Cipher to use"
+        choices=["caesar", "vigenere", "affine"],
+        help="Cipher to use: caesar, vigenere, affine"
     )
 
     parser.add_argument(
@@ -91,6 +92,8 @@ def validate_args(parser, args):
             parser.error(
                 "--cipher vigenere requires --key"
             )
+    if args.cipher == "affine" and args.key is None:
+        parser.error("--cipher affine requires --key in format a,b")
 
 def read_input(args):
     if args.text is not None:
@@ -119,6 +122,15 @@ def process_cipher(args, text):
             else:
                 result = VigenereCipher.encrypt(result, args.key)
         return result
+    elif args.cipher == 'affine':
+            result = text
+            keys=args.key.split(',')
+            for _ in range(args.iterations):
+                if args.decrypt:
+                    result = AffineCipher.decrypt(result, int(keys[0]),int(keys[1]))
+                else:
+                    result = AffineCipher.encrypt(result, int(keys[0]), int(keys[1]))
+            return result
     else:
         raise ValueError(f"Unknown cipher: {args.cipher}")
 

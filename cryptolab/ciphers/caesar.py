@@ -3,8 +3,7 @@ class CaesarCipher:
     def encrypt(text: str, key: int) -> str:
         if not isinstance(key, int):
             raise TypeError("Key must be an int")
-        
-        
+
         result = ""
 
         for char in text:

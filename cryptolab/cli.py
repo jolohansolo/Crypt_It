@@ -101,13 +101,14 @@ def read_input(args):
 
 def process_cipher(args, text):
     if args.cipher == "caesar":
+        key = int(args.key)
         result = text
 
         for _ in range(args.iterations):
             if args.decrypt:
-                result = CaesarCipher.decrypt(result, args.key)
+                result = CaesarCipher.decrypt(result, key)
             else:
-                result = CaesarCipher.encrypt(result, args.key)
+                result = CaesarCipher.encrypt(result, key)
 
         return result
     elif args.cipher == 'vigenere':

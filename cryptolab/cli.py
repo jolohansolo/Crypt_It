@@ -87,6 +87,10 @@ def validate_args(parser, args):
         parser.error(
             "--cipher caesar requires --key"
         )
+    if args.cipher == "vigenere" and args.key is None:
+            parser.error(
+                "--cipher vigenere requires --key"
+            )
 
 def read_input(args):
     if args.text is not None:

@@ -4,6 +4,7 @@ import os
 from cryptolab.ciphers.caesar import CaesarCipher
 from cryptolab.ciphers.vigenere import VigenereCipher
 from cryptolab.ciphers.affine import AffineCipher
+from cryptolab.ciphers.hill import HillCipher
 
 def correct_path(string):
     if not string.lower().endswith(".txt"):
@@ -37,7 +38,7 @@ def create_parser():
     parser.add_argument(
         "--cipher",
         required=True,
-        choices=["caesar", "vigenere", "affine"],
+        choices=["caesar", "vigenere", "affine","hill"],
         help="Cipher to use: caesar, vigenere, affine"
     )
 
@@ -94,6 +95,8 @@ def validate_args(parser, args):
             )
     if args.cipher == "affine" and args.key is None:
         parser.error("--cipher affine requires --key in format a,b")
+    if args.cipher == "hill" and args.key is None:
+            parser.error("--cipher hill requires --key in format x,x;x,x")
 
 def read_input(args):
     if args.text is not None:
@@ -130,6 +133,14 @@ def process_cipher(args, text):
                     result = AffineCipher.decrypt(result, int(keys[0]),int(keys[1]))
                 else:
                     result = AffineCipher.encrypt(result, int(keys[0]), int(keys[1]))
+            return result
+    elif args.cipher == 'hill':
+            result = text
+            for _ in range(args.iterations):
+                if args.decrypt:
+                    result = HillCipher.decrypt(result, args.key)
+                else:
+                    result = HillCipher.encrypt(result, args.key)
             return result
     else:
         raise ValueError(f"Unknown cipher: {args.cipher}")

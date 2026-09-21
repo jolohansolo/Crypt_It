@@ -1,12 +1,13 @@
 # CryptoLab
 
 ```text
-.o88b. d8888b. db    db d8888b. d888888b .d88b.  db       .d8b.  d8888b.
-d8P  Y8 88  `8D `8b  d8' 88  `8D `~~88~~' .8P  Y8. 88      d8' `8b 88  `8D
-8P      88oobY'  `8bd8'  88oodD'    88    88    88 88      88ooo88 88oooY'
-8b      88`8b     88    88~~~       88    88    88 88      88~~~88 88~~~b.
-Y8b  d8 88 `88.    88    88          88    `8b  d8' 88booo. 88   88 88   8D
- `Y88P' 88   YD     YP    88          YP     `Y88P'  Y88888P YP   YP Y8888P'
+      :::::::: ::::::::: :::   ::::::::::::::::::::::::::::::: :::           :::    ::::::::: 
+    :+:    :+::+:    :+::+:   :+::+:    :+:   :+:   :+:    :+::+:         :+: :+:  :+:    :+: 
+   +:+       +:+    +:+ +:+ +:+ +:+    +:+   +:+   +:+    +:++:+        +:+   +:+ +:+    +:+  
+  +#+       +#++:++#:   +#++:  +#++:++#+    +#+   +#+    +:++#+       +#++:++#++:+#++:++#+    
+ +#+       +#+    +#+   +#+   +#+          +#+   +#+    +#++#+       +#+     +#++#+    +#+    
+#+#    #+##+#    #+#   #+#   #+#          #+#   #+#    #+##+#       #+#     #+##+#    #+#     
+######## ###    ###   ###   ###          ###    ######## #############     ############       
 ```
 
 Educational cryptography toolkit written in Python.
@@ -23,6 +24,7 @@ The project is primarily educational and focuses on understanding how different 
 - Vigenere cipher
 - Affine cipher
 - Hill cipher
+- Playfair cipher
 - Encryption and decryption
 - Multiple cipher iterations
 - Text input
@@ -32,13 +34,12 @@ The project is primarily educational and focuses on understanding how different 
 
 ## Planned features
 
-- Playfair cipher
 - RSA
 - Enigma
 
 ## Requirements
 
-- Python 3.x
+- Python >=3.10
 - pytest
 
 ## Installation
@@ -95,7 +96,17 @@ cryptolab --cipher hill --key "3,3;2,5" --text "hello"
 ```bash
 cryptolab --cipher hill --key "6,24,1;13,16,10;20,17,15" --text "hello"
 ```
+### Playfair
 
+```bash
+cryptolab --cipher playfair --key MONARCHY --text "INSTRUMENTS"
+```
+
+Decrypt:
+
+```bash
+cryptolab --cipher playfair --key MONARCHY --text "GATLMZCLRQXA" --decrypt
+```
 ## Cipher keys
 
 - **Caesar** — key must be an integer.

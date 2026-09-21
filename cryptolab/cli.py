@@ -5,6 +5,7 @@ from cryptolab.ciphers.caesar import CaesarCipher
 from cryptolab.ciphers.vigenere import VigenereCipher
 from cryptolab.ciphers.affine import AffineCipher
 from cryptolab.ciphers.hill import HillCipher
+from cryptolab.ciphers.playfair import PlayfairCipher
 
 def correct_path(string):
     if not string.lower().endswith(".txt"):
@@ -38,8 +39,8 @@ def create_parser():
     parser.add_argument(
         "--cipher",
         required=True,
-        choices=["caesar", "vigenere", "affine","hill"],
-        help="Cipher to use: caesar, vigenere, affine"
+        choices=["caesar", "vigenere", "affine","hill","playfair"],
+        help="Cipher to use: caesar, vigenere, affine,hill, playfair"
     )
 
     parser.add_argument(
@@ -85,18 +86,17 @@ def create_parser():
 
 
 def validate_args(parser, args):
-    if args.cipher == "caesar" and args.key is None:
-        parser.error(
-            "--cipher caesar requires --key"
-        )
-    if args.cipher == "vigenere" and args.key is None:
-            parser.error(
-                "--cipher vigenere requires --key"
-            )
-    if args.cipher == "affine" and args.key is None:
-        parser.error("--cipher affine requires --key in format a,b")
-    if args.cipher == "hill" and args.key is None:
-            parser.error("--cipher hill requires --key in format x,x;x,x")
+    match (args.cipher, args.key):
+        case ("caesar", None):
+            parser.error("--cipher caesar requires --key")
+        case ("vigenere", None):
+            parser.error("--cipher vigenere requires --key")
+        case ("affine", None):
+            parser.error("--cipher affine requires --key in format a,b")
+        case ("hill", None):
+            parser.error("--cipher hill requires --key in matrix format e.g. x,x;x,x")
+        case ("playfair", None):
+            parser.error("--cipher playfair requires --key")
 
 def read_input(args):
     if args.text is not None:
@@ -106,44 +106,47 @@ def read_input(args):
         return file.read()
 
 def process_cipher(args, text):
-    if args.cipher == "caesar":
-        key = int(args.key)
-        result = text
+    result = text
 
-        for _ in range(args.iterations):
-            if args.decrypt:
-                result = CaesarCipher.decrypt(result, key)
-            else:
-                result = CaesarCipher.encrypt(result, key)
-
-        return result
-    elif args.cipher == 'vigenere':
-        result = text
-        for _ in range(args.iterations):
-            if args.decrypt:
-                result = VigenereCipher.decrypt(result, args.key)
-            else:
-                result = VigenereCipher.encrypt(result, args.key)
-        return result
-    elif args.cipher == 'affine':
-            result = text
-            keys=args.key.split(',')
-            for _ in range(args.iterations):
+    for _ in range(args.iterations):
+        match args.cipher:
+            case "caesar":
+                key = int(args.key)
                 if args.decrypt:
-                    result = AffineCipher.decrypt(result, int(keys[0]),int(keys[1]))
+                    result = CaesarCipher.decrypt(result, key)
                 else:
-                    result = AffineCipher.encrypt(result, int(keys[0]), int(keys[1]))
-            return result
-    elif args.cipher == 'hill':
-            result = text
-            for _ in range(args.iterations):
+                    result = CaesarCipher.encrypt(result, key)
+                    
+            case "vigenere":
+                if args.decrypt:
+                    result = VigenereCipher.decrypt(result, args.key)
+                else:
+                    result = VigenereCipher.encrypt(result, args.key)
+                    
+            case "affine":
+                a, b = map(int, args.key.split(','))
+                if args.decrypt:
+                    result = AffineCipher.decrypt(result, a, b)
+                else:
+                    result = AffineCipher.encrypt(result, a, b)
+                    
+            case "hill":
                 if args.decrypt:
                     result = HillCipher.decrypt(result, args.key)
                 else:
                     result = HillCipher.encrypt(result, args.key)
-            return result
-    else:
-        raise ValueError(f"Unknown cipher: {args.cipher}")
+                    
+            case "playfair":
+                if args.decrypt:
+                    result = PlayfairCipher.decrypt(result, args.key)
+                else:
+                    result = PlayfairCipher.encrypt(result, args.key)
+                    
+            case _:
+                raise ValueError(f"Unknown cipher: {args.cipher}")
+
+    return result
+    
 
 def main():
     parser = create_parser()

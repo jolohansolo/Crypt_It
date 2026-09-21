@@ -44,11 +44,18 @@ The project is primarily educational and focuses on understanding how different 
 
 ## Installation
 
-Clone the repository and install the project dependencies.
+Clone the repository and install CryptoLab in editable mode.
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/jolohansolo/CryptoLab.git
 cd CryptoLab
+pip install -e .
+```
+
+For development and testing, install the test dependencies as well:
+
+```bash
+pip install pytest
 ```
 
 ## Running

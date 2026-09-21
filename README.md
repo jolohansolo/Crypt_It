@@ -146,8 +146,3 @@ Run the test suite with:
 pytest
 ```
 
-## Project status
-
-CryptoLab is an educational project under active development.
-
-New ciphers, validation rules, tests and CLI features will be added over time.

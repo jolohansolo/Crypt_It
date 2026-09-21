@@ -3,10 +3,10 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cryptolab"
+name = "cryptit"
 version = "0.1.0"
 description = "Educational cryptography toolkit"
 requires-python = ">=3.10"
 
 [project.scripts]
-cryptolab = "cryptolab.cli:main"
+cryptit = "cryptit.cli:main"

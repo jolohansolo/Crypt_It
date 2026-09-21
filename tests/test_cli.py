@@ -1,6 +1,6 @@
 import pytest
 
-from cryptolab.cli import main
+from cryptit.cli import main
 
 
 # ---------------------------------------------------------
@@ -11,7 +11,7 @@ def test_cli_encrypt(capsys, monkeypatch):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
             "--text", "Hello World",
@@ -33,7 +33,7 @@ def test_cli_decrypt(capsys, monkeypatch):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
             "--decrypt",
@@ -56,7 +56,7 @@ def test_cli_iterations(capsys, monkeypatch):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
             "--iterations", "2",
@@ -79,7 +79,7 @@ def test_cli_verbose(capsys, monkeypatch):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
             "--text", "Hello",
@@ -106,7 +106,7 @@ def test_cli_requires_key(capsys, monkeypatch):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--text", "Hello",
         ],
@@ -126,7 +126,7 @@ def test_cli_iterations_must_be_positive(capsys, monkeypatch):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
             "--iterations", "0",
@@ -152,7 +152,7 @@ def test_cli_requires_text_or_file(capsys, monkeypatch):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
         ],
@@ -175,7 +175,7 @@ def test_cli_does_not_allow_text_and_file_together(
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
             "--text", "Hello",
@@ -200,7 +200,7 @@ def test_cli_encrypt_file(capsys, monkeypatch, tmp_path):
     monkeypatch.setattr(
         "sys.argv",
         [
-            "cryptolab",
+            "cryptit",
             "--cipher", "caesar",
             "--key", "3",
             "--file", str(test_file),
@@ -213,7 +213,7 @@ def test_cli_encrypt_file(capsys, monkeypatch, tmp_path):
 
     assert captured.out.strip() == "Khoor Zruog"
 
-from cryptolab.cli import create_parser, process_cipher
+from cryptit.cli import create_parser, process_cipher
 
 
 def test_affine_encrypt():

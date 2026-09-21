@@ -1,6 +1,6 @@
 import pytest
 
-from cryptolab.ciphers.hill import HillCipher
+from cryptit.ciphers.hill import HillCipher
 
 
 def test_parse_key_2x2():

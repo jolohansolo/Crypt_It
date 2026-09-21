@@ -1,4 +1,4 @@
-from cryptolab.ciphers.caesar import CaesarCipher
+from cryptit.ciphers.caesar import CaesarCipher
 
 def test_encrypt_basic():
     result = CaesarCipher.encrypt("ABC", 3)

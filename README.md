@@ -1,20 +1,18 @@
-# CryptoLab
-
 ```text
-      :::::::: ::::::::: :::   ::::::::::::::::::::::::::::::: :::           :::    ::::::::: 
-    :+:    :+::+:    :+::+:   :+::+:    :+:   :+:   :+:    :+::+:         :+: :+:  :+:    :+: 
-   +:+       +:+    +:+ +:+ +:+ +:+    +:+   +:+   +:+    +:++:+        +:+   +:+ +:+    +:+  
-  +#+       +#++:++#:   +#++:  +#++:++#+    +#+   +#+    +:++#+       +#++:++#++:+#++:++#+    
- +#+       +#+    +#+   +#+   +#+          +#+   +#+    +#++#+       +#+     +#++#+    +#+    
-#+#    #+##+#    #+#   #+#   #+#          #+#   #+#    #+##+#       #+#     #+##+#    #+#     
-######## ###    ###   ###   ###          ###    ######## #############     ############       
+      :::::::: ::::::::: :::   ::::::::::::::::::::::::::::::::::::::::::::: 
+    :+:    :+::+:    :+::+:   :+::+:    :+:   :+:        :+:        :+:      
+   +:+       +:+    +:+ +:+ +:+ +:+    +:+   +:+        +:+        +:+       
+  +#+       +#++:++#:   +#++:  +#++:++#+    +#+        +#+        +#+        
+ +#+       +#+    +#+   +#+   +#+          +#+        +#+        +#+         
+#+#    #+##+#    #+#   #+#   #+#          #+#        #+#        #+#          
+######## ###    ###   ###   ###          ###    ###########    ###                
 ```
 
 Educational cryptography toolkit written in Python.
 
 ## Project goals
 
-CryptoLab is a command-line application for experimenting with classical cryptographic algorithms.
+CryptIt is a command-line application for experimenting with classical cryptographic algorithms.
 
 The project is primarily educational and focuses on understanding how different ciphers work and how they can be implemented and tested in Python.
 
@@ -44,11 +42,11 @@ The project is primarily educational and focuses on understanding how different 
 
 ## Installation
 
-Clone the repository and install CryptoLab in editable mode.
+Clone the repository and install CryptIt in editable mode.
 
 ```bash
-git clone https://github.com/jolohansolo/CryptoLab.git
-cd CryptoLab
+git clone https://github.com/jolohansolo/CryptIt.git
+cd CryptoIt
 pip install -e .
 ```
 
@@ -61,7 +59,7 @@ pip install pytest
 ## Running
 
 ```bash
-cryptolab [-h] --cipher {caesar,vigenere,affine,hill} [--key KEY] [--iterations ITERATIONS] (--text TEXT | --file FILE) [--decrypt] [--verbose]
+cryptit [-h] --cipher {caesar,vigenere,affine,hill} [--key KEY] [--iterations ITERATIONS] (--text TEXT | --file FILE) [--decrypt] [--verbose]
 ```
 
 ## Examples
@@ -69,25 +67,25 @@ cryptolab [-h] --cipher {caesar,vigenere,affine,hill} [--key KEY] [--iterations 
 ### Caesar
 
 ```bash
-cryptolab --cipher caesar --key 3 --text "hello"
+cryptit --cipher caesar --key 3 --text "hello"
 ```
 
 Decrypt:
 
 ```bash
-cryptolab --cipher caesar --key 3 --text "khoor" --decrypt
+cryptit --cipher caesar --key 3 --text "khoor" --decrypt
 ```
 
 ### Vigenere
 
 ```bash
-cryptolab --cipher vigenere --key secret --text "hello"
+cryptit --cipher vigenere --key secret --text "hello"
 ```
 
 ### Affine
 
 ```bash
-cryptolab --cipher affine --key "5,8" --text "hello"
+cryptit --cipher affine --key "5,8" --text "hello"
 ```
 
 ### Hill
@@ -95,24 +93,24 @@ cryptolab --cipher affine --key "5,8" --text "hello"
 2x2 matrix:
 
 ```bash
-cryptolab --cipher hill --key "3,3;2,5" --text "hello"
+cryptit --cipher hill --key "3,3;2,5" --text "hello"
 ```
 
 3x3 matrix:
 
 ```bash
-cryptolab --cipher hill --key "6,24,1;13,16,10;20,17,15" --text "hello"
+cryptit --cipher hill --key "6,24,1;13,16,10;20,17,15" --text "hello"
 ```
 ### Playfair
 
 ```bash
-cryptolab --cipher playfair --key MONARCHY --text "INSTRUMENTS"
+cryptit --cipher playfair --key MONARCHY --text "INSTRUMENTS"
 ```
 
 Decrypt:
 
 ```bash
-cryptolab --cipher playfair --key MONARCHY --text "GATLMZCLRQXA" --decrypt
+cryptit --cipher playfair --key MONARCHY --text "GATLMZCLRQXA" --decrypt
 ```
 ## Cipher keys
 
@@ -131,10 +129,10 @@ Matrix formats:
 
 ## File input
 
-CryptoLab can process text files using the `--file` argument:
+CryptIt can process text files using the `--file` argument:
 
 ```bash
-cryptolab --cipher caesar --key 3 --file input.txt
+cryptit --cipher caesar --key 3 --file input.txt
 ```
 
 ## Help
@@ -142,7 +140,7 @@ cryptolab --cipher caesar --key 3 --file input.txt
 Display all available options:
 
 ```bash
-cryptolab --help
+cryptit --help
 ```
 
 ## Tests

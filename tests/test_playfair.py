@@ -1,4 +1,4 @@
-from cryptolab.ciphers.playfair import PlayfairCipher
+from cryptit.ciphers.playfair import PlayfairCipher
 import pytest
 
 

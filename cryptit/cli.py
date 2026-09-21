@@ -1,11 +1,11 @@
 import argparse
 import os
 
-from cryptolab.ciphers.caesar import CaesarCipher
-from cryptolab.ciphers.vigenere import VigenereCipher
-from cryptolab.ciphers.affine import AffineCipher
-from cryptolab.ciphers.hill import HillCipher
-from cryptolab.ciphers.playfair import PlayfairCipher
+from cryptit.ciphers.caesar import CaesarCipher
+from cryptit.ciphers.vigenere import VigenereCipher
+from cryptit.ciphers.affine import AffineCipher
+from cryptit.ciphers.hill import HillCipher
+from cryptit.ciphers.playfair import PlayfairCipher
 
 def correct_path(string):
     if not string.lower().endswith(".txt"):
@@ -32,8 +32,8 @@ def positive_int(value):
 
 def create_parser():
     parser = argparse.ArgumentParser(
-        prog="cryptolab",
-        description="CryptoLab - educational cryptography toolkit"
+        prog="cryptit",
+        description="CryptIt - educational cryptography toolkit"
     )
 
     parser.add_argument(

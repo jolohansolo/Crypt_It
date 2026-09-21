@@ -1,8 +1,8 @@
 import pytest
 from argparse import Namespace
 
-from cryptolab.cli import process_cipher
-from cryptolab.ciphers.vigenere import VigenereCipher
+from cryptit.cli import process_cipher
+from cryptit.ciphers.vigenere import VigenereCipher
 
 
 class TestVigenereCipher:

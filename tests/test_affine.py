@@ -1,7 +1,7 @@
 
 import pytest
 
-from cryptolab.ciphers.affine import AffineCipher
+from cryptit.ciphers.affine import AffineCipher
 
 
 def test_encrypt():
@@ -53,7 +53,7 @@ def test_encrypt_with_b_greater_than_26():
 
 
 def test_encrypt_decrypt_roundtrip():
-    text = "Hello, CryptoLab! 123"
+    text = "Hello, CryptIt! 123"
     encrypted = AffineCipher.encrypt(text, 5, 8)
     decrypted = AffineCipher.decrypt(encrypted, 5, 8)
 

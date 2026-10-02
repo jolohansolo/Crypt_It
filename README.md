@@ -45,8 +45,8 @@ The project is primarily educational and focuses on understanding how different 
 Clone the repository and install CryptIt in editable mode.
 
 ```bash
-git clone https://github.com/jolohansolo/CryptIt.git
-cd CryptoIt
+git clone https://github.com/jolohansolo/Crypt_It.git
+cd CryptIt
 pip install -e .
 ```
 
